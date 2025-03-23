@@ -7,7 +7,7 @@ email: perinova.petra@seznam.cz
 import random
 
 def generate_secret_number():
-    digits = list("123456789")  # Possible first digits (cannot be 0)
+    digits = list("123456789")  #
     first_digit = random.choice(digits)
     remaining_digits = list("0123456789")
     remaining_digits.remove(first_digit)
@@ -16,23 +16,23 @@ def generate_secret_number():
 
 def is_valid_guess(guess, previous_guesses):
     line = "-" * 35
-    guess = guess.strip()  # Odstraní mezery na začátku a na konci
-    if not guess.isdigit():  # Zkontroluje, jestli jsou všechny znaky číslice
+    guess = guess.strip() 
+    if not guess.isdigit():  
         print(line)
         print("Invalid input! Use digits only.")
         print(line)
         return False
-    if len(guess) != 4:  # Zkontroluje, jestli má číslo 4 cifry
+    if len(guess) != 4: 
         print(line)
         print("The number must have exactly 4 digits.")
         print(line)
         return False
-    if guess[0] == '0':  # Zkontroluje, jestli číslo nezačíná nulou
+    if guess[0] == '0':  
         print(line)
         print("The number cannot start with 0.")
         print(line)
         return False
-    if guess in previous_guesses:  # Zkontroluje, jestli už tento tip nebyl zadán
+    if guess in previous_guesses:  
         print(line)
         print("You've already tried this number!")
         print(line)
@@ -40,8 +40,8 @@ def is_valid_guess(guess, previous_guesses):
     return True
 
 def evaluate_guess(secret, guess):
-    bulls = sum(1 for s, g in zip(secret, guess) if s == g)  # Počet "bulls"
-    cows = sum(1 for g in guess if g in secret) - bulls  # Počet "cows" bez "bulls"
+    bulls = sum(1 for s, g in zip(secret, guess) if s == g)  
+    cows = sum(1 for g in guess if g in secret) - bulls  
     return bulls, cows
 
 def print_result(bulls, cows):
@@ -61,7 +61,7 @@ def main():
     print(line)
     secret_number = generate_secret_number()
     attempts = 0
-    previous_guesses = set()  # Uchování předchozích tipů
+    previous_guesses = set()  
     
     while True:
         print("Enter a number:")
@@ -70,7 +70,7 @@ def main():
         if not is_valid_guess(guess, previous_guesses):
             continue
         
-        previous_guesses.add(guess)  # Uložíme číslo, aby se neopakovalo
+        previous_guesses.add(guess)  
         attempts += 1
         bulls, cows = evaluate_guess(secret_number, guess)
         print_result(bulls, cows)
